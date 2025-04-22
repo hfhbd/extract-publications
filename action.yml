@@ -1,0 +1,32 @@
+{
+  "name": "Publish Gradle Maven Publications to GitHub Attest Build Provenance",
+  "description": "This action extracts all Gradle maven publications and publish them to GitHub",
+
+  "inputs": {
+    "version": {
+      "description": "The release version",
+      "required": true
+    },
+  },
+
+  "runs": {
+    "using": "composite",
+    "steps": [
+      {
+        "uses": "./setup-action",
+      },
+      {
+        "name": "Write outputs",
+        "id": "publications",
+        "run": "./gradlew :writePublicationsToGitHubOutput -Pversion=${{ inputs.version }}",
+        "shell": "bash",
+      },
+      {
+        "uses": "actions/attest-build-provenance@v2",
+        "with": {
+          "subject-path": "${{ steps.publications.outputs.publishedFiles }}",
+        }
+      }
+    ]
+  }
+}

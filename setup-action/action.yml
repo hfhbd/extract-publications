@@ -1,0 +1,8 @@
+{
+  "name": "Setup Gradle for GitHub Publications",
+  "description": "This action setup the Gradle extractor",
+  "runs": {
+    "using": "node20",
+    "main": "dist/actions.mjs"
+  }
+}
