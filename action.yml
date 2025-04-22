@@ -13,7 +13,7 @@
     "using": "composite",
     "steps": [
       {
-        "uses": "hfhbd/extract-publications/setup-action",
+        "uses": "./setup-action",
       },
       {
         "name": "Write outputs",
