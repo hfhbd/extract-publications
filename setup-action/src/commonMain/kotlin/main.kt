@@ -1,28 +1,28 @@
 import node.process.process
-import io.github.hfhbd.extractpublications.VERSION
 import node.fs.writeFile
 
-suspend fun action() {
+suspend fun action(
+    version: String,
+) {
     val gradleUserHome = process.env["GRADLE_USER_HOME"]!!
-    writeFile("$gradleUserHome/init.d/extract-publications.init.gradle.kts", extractInitScript)
+    writeFile("$gradleUserHome/init.d/extract-publications.init.gradle.kts", extractInitScript(version))
 }
 
 // language=Gradle
-private const val extractInitScript = """
-    initscript {
-        repositories {
-            maven(url = "https://maven.pkg.github.com/hfhbd/extract-publications") {
-                name = "GitHubPackages"
-                credentials(PasswordCredentials::class)
-            }
+private fun extractInitScript(version: String) = """
+    beforeSettings {
+      buildscript.repositories {
+        maven(url = "https://maven.pkg.github.com/hfhbd/extract-publications") {
+            name = "GitHubPackages"
+            credentials(PasswordCredentials::class)
         }
 
-        dependencies {
-            classpath("io.github.hfhbd.extract-publications:gradle-plugin:$VERSION")
-        }
     }
+    buildscript.dependencies.add("classpath", "io.github.hfhbd.extract-publications:gradle-plugin:$version")
+}
 
-    lifecycle.afterProject {
+lifecycle.afterProject {
+    if (isolated.buildTreePath == ":") {
         if (this == rootProject) {
             pluginManager.apply("io.github.hfhbd.extract-publications.root")
         }
@@ -31,5 +31,6 @@ private const val extractInitScript = """
             pluginManager.apply("io.github.hfhbd.extract-publications")
         }
     }
+}
 
 """

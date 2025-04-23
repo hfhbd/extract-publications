@@ -1,6 +1,12 @@
 {
   "name": "Setup Gradle for GitHub Publications",
   "description": "This action setup the Gradle extractor",
+  "inputs": {
+    "version": {
+      "description": "The version of the Gradle extractor",
+      "required": true
+    }
+  },
   "runs": {
     "using": "node20",
     "main": "dist/actions.mjs"
