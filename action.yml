@@ -4,7 +4,11 @@
 
   "inputs": {
     "version": {
-      "description": "The release version",
+      "description": "The release version of the Gradle project",
+      "required": true
+    },
+    "setup-version": {
+      "description": "The version of this action",
       "required": true
     },
   },
@@ -14,6 +18,9 @@
     "steps": [
       {
         "uses": "./setup-action",
+        "with": {
+          "version": "${{ inputs.setup-version }}"
+        }
       },
       {
         "name": "Write outputs",
