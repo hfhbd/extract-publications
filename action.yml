@@ -19,7 +19,7 @@
       {
         "uses": "./setup-action",
         "with": {
-          "setup-version": "${{ inputs.setup-version }}"
+          "version": "${{ inputs.setup-version }}"
         }
       },
       {

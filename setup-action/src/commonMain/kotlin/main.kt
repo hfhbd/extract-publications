@@ -9,9 +9,8 @@ suspend fun action(
 }
 
 // language=Gradle
-private fun extractInitScript(version: String) = """
-    beforeSettings {
-      buildscript.repositories {
+private fun extractInitScript(version: String) = """beforeSettings {
+    buildscript.repositories {
         maven(url = "https://maven.pkg.github.com/hfhbd/extract-publications") {
             name = "GitHubPackages"
             credentials(PasswordCredentials::class)
@@ -32,5 +31,4 @@ lifecycle.afterProject {
         }
     }
 }
-
 """
