@@ -7,6 +7,11 @@ kotlin.jvmToolchain(21)
 
 testing.suites.withType<JvmTestSuite>().configureEach {
     useKotlinTest()
+    targets.configureEach {
+        testTask {
+            environment("GITHUB_OUTPUT", "foo")
+        }
+    }
 }
 
 gradlePlugin.plugins.configureEach {
