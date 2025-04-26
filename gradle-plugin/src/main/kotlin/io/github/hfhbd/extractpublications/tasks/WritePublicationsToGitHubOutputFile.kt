@@ -3,7 +3,7 @@ package io.github.hfhbd.extractpublications.tasks
 import io.github.hfhbd.extractpublications.service.WriteLockService
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
-import org.gradle.api.provider.Provider
+import org.gradle.api.provider.Property
 import org.gradle.api.services.ServiceReference
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.PathSensitive
@@ -19,7 +19,7 @@ abstract class WritePublicationsToGitHubOutputFile : DefaultTask() {
     abstract val publicationFiles: ConfigurableFileCollection
 
     @get:ServiceReference("writeLock")
-    abstract val writeLockService: Provider<WriteLockService>
+    internal abstract val writeLockService: Property<WriteLockService>
 
     @TaskAction
     internal fun action() {
