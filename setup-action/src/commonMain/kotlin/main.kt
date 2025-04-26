@@ -13,15 +13,13 @@ suspend fun action(
  */
 // language=Gradle
 private fun extractInitScript(version: String) = """beforeSettings {
-    buildscript {
-        repositories {
-            maven(url = "https://maven.pkg.github.com/hfhbd/extract-publications") {
-                name = "GitHubPackages"
-                credentials(PasswordCredentials::class)
-            }
+    buildscript.repositories {
+        maven(url = "https://maven.pkg.github.com/hfhbd/extract-publications") {
+            name = "GitHubPackages"
+            credentials(PasswordCredentials::class)
         }
-        dependencies.add("classpath", "io.github.hfhbd.extract-publications:gradle-plugin:$version")
     }
+    buildscript.dependencies.add("classpath", "io.github.hfhbd.extract-publications:gradle-plugin:$version")
 }
 
 lifecycle.afterProject {
