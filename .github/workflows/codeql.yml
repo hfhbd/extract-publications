@@ -52,7 +52,7 @@ jobs:
         uses: github/codeql-action/analyze@v3
 
   analyzeActions:
-    name: Analyze
+    name: Analyze Actions
     runs-on: ubuntu-latest
     permissions:
       actions: read
