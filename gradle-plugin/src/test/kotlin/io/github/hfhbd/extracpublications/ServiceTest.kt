@@ -21,14 +21,10 @@ class ServiceTest {
         }
 
         service.get().use {
-            it.appendLine("asdf")
-            it.appendLine("bar")
+            it.addFileToOutput("asdf")
+            it.addFileToOutput("bar")
         }
 
-        assertEquals(
-            """publishedFiles<<EOF
-asdf
-bar
-EOF""", file.readText())
+        assertEquals("publishedFiles=asdf,bar,", file.readText())
     }
 }
