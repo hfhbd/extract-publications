@@ -25,7 +25,7 @@
       {
         "name": "Write outputs",
         "id": "publications",
-        "run": "./gradlew :writePublicationsToGitHubOutput -Pversion=${{ inputs.version }}",
+        "run": "./gradlew writePublicationsToGitHubOutput -Pversion=${{ inputs.version }}",
         "shell": "bash",
       },
       {
