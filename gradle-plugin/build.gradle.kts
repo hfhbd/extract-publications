@@ -10,8 +10,8 @@ testing.suites.withType<JvmTestSuite>().configureEach {
 }
 
 gradlePlugin.plugins.configureEach {
-    displayName = "Gradle plugin to write publications to GitHub OUTPUT"
-    description = "Gradle plugin to write publications to GitHub OUTPUT"
+    displayName = "Gradle plugin to write publications to GITHUB_OUTPUT"
+    description = "Gradle plugin to write publications to GITHUB_OUTPUT"
 }
 
 configurations.configureEach {
