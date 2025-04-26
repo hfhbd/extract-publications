@@ -9,10 +9,13 @@ gradle.sharedServices.registerIfAbsent("writeLock", WriteLockService::class) {
     parameters.outputFile.set(file(providers.environmentVariable("GITHUB_OUTPUT")))
 }
 
-val mavenArtefacts = objects.fileCollection()
-for (mavenArtefact in publishing.publications.withType<MavenPublication>().flatMap { it.artifacts }) {
-    mavenArtefacts.from(mavenArtefact.file)
-    mavenArtefacts.builtBy(mavenArtefact.buildDependencies)
+val mavenArtefacts = provider {
+    val s = objects.fileCollection()
+
+    for (mavenArtefact in publishing.publications.withType<MavenPublication>().flatMap { it.artifacts }) {
+        s.from(mavenArtefact.file).builtBy(mavenArtefact.buildDependencies)
+    }
+    s
 }
 
 tasks.register("writePublicationsToGitHubOutputFile", WritePublicationsToGitHubOutputFile::class) {
