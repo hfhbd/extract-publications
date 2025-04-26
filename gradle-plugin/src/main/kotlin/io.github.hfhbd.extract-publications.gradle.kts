@@ -15,6 +15,6 @@ for (mavenArtefact in publishing.publications.withType<MavenPublication>().flatM
     mavenArtefacts.builtBy(mavenArtefact.buildDependencies)
 }
 
-tasks.register("writePublicationsToGithubOutputFile", WritePublicationsToGitHubOutputFile::class) {
+tasks.register("writePublicationsToGitHubOutputFile", WritePublicationsToGitHubOutputFile::class) {
     publicationFiles.from(mavenArtefacts)
 }
