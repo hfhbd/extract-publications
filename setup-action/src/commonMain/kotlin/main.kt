@@ -8,16 +8,20 @@ suspend fun action(
     writeFile("$gradleUserHome/init.d/extract-publications.init.gradle.kts", extractInitScript(version))
 }
 
+/**
+ * @param version Workaround because the released action uses a branch strategy. With Immutable Actions, the version can be hard coded via the release process.
+ */
 // language=Gradle
 private fun extractInitScript(version: String) = """beforeSettings {
-    buildscript.repositories {
-        maven(url = "https://maven.pkg.github.com/hfhbd/extract-publications") {
-            name = "GitHubPackages"
-            credentials(PasswordCredentials::class)
+    buildscript {
+        repositories {
+            maven(url = "https://maven.pkg.github.com/hfhbd/extract-publications") {
+                name = "GitHubPackages"
+                credentials(PasswordCredentials::class)
+            }
         }
-
+        dependencies.add("classpath", "io.github.hfhbd.extract-publications:gradle-plugin:$version")
     }
-    buildscript.dependencies.add("classpath", "io.github.hfhbd.extract-publications:gradle-plugin:$version")
 }
 
 lifecycle.afterProject {
