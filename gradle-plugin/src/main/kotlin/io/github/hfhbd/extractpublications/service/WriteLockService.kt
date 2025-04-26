@@ -14,15 +14,15 @@ abstract class WriteLockService @Inject constructor(
     private val writer = parameters.outputFile.asFile.get().bufferedWriter()
 
     init {
-        writer.appendLine("publishedFiles<<EOF")
+        writer.append("publishedFiles=")
     }
 
-    fun appendLine(text: CharSequence) {
-        writer.appendLine(text)
+    fun addFileToOutput(filePath: CharSequence) {
+        writer.append(filePath)
+        writer.append(',')
     }
 
     override fun close() {
-        writer.write("EOF")
         writer.close()
     }
 }

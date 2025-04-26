@@ -25,7 +25,7 @@ abstract class WritePublicationsToGitHubOutputFile : DefaultTask() {
     internal fun action() {
         val writeLockService = writeLockService.get()
         for (file in publicationFiles) {
-            writeLockService.appendLine(file.absolutePath)
+            writeLockService.addFileToOutput(file.absolutePath)
         }
     }
 }
