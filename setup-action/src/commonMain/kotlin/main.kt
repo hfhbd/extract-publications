@@ -22,10 +22,6 @@ private fun extractInitScript(version: String) = """beforeSettings {
 
 lifecycle.afterProject {
     if (isolated.buildTreePath == ":") {
-        if (this == rootProject) {
-            pluginManager.apply("io.github.hfhbd.extract-publications.root")
-        }
-
         pluginManager.withPlugin("maven-publish") {
             pluginManager.apply("io.github.hfhbd.extract-publications")
         }
