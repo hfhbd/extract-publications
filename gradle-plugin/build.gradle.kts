@@ -5,6 +5,11 @@ plugins {
 
 kotlin.jvmToolchain(21)
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 testing.suites.withType<JvmTestSuite>().configureEach {
     useKotlinTest()
     targets.configureEach {
