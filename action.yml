@@ -17,7 +17,7 @@
     "using": "composite",
     "steps": [
       {
-        "uses": "./setup-action",
+        "uses": "hfhbd/extract-publications/setup-action@v${{ inputs.setup-version }}",
         "with": {
           "version": "${{ inputs.setup-version }}"
         }
